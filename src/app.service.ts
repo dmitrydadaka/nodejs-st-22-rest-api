@@ -41,7 +41,7 @@ export class AppService {
   }
 
   public update(id: string, user: User): User {
-    const result = PutSchema.validateAsync();
+    const result = PutSchema.validateAsync(user);
     console.log(result);
     const userIndex: number = this.users.findIndex( user => user.id === id);
 
