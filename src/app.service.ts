@@ -1,7 +1,6 @@
 import { Injectable, NotFoundException, UnprocessableEntityException } from '@nestjs/common';
 import { User } from './model';
 import { v4 as uuidv4} from 'uuid';
-import { PostSchema, PutSchema } from './helpers/valid';
 
 @Injectable()
 export class AppService {
@@ -22,8 +21,7 @@ export class AppService {
   }
 
   public create(user: User): User {
-    const result = PostSchema.validateAsync(user);
-    console.log(result);
+  
     const newUser: User = {...user, id: uuidv4()}
     this.users.push(newUser);
 
@@ -41,8 +39,7 @@ export class AppService {
   }
 
   public update(id: string, user: User): User {
-    const result = PutSchema.validateAsync(user);
-    console.log(result);
+    
     const userIndex: number = this.users.findIndex( user => user.id === id);
 
     if (userIndex === -1) {
