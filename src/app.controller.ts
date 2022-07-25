@@ -29,8 +29,8 @@ export class AppController {
     }
     catch (err) {
       if (err) throw new BadRequestException(err.details[0].message)
-      return await this.appService.create(user);
     }
+    return await this.appService.create(user);
   }
 
   @Delete(':id')
@@ -45,7 +45,8 @@ export class AppController {
     }
     catch (err) {
       if (err) throw new BadRequestException(err.details[0].message)
-      return await this.appService.create(user);
     }
+    return await this.appService.update(id, user);
+
   }
 }
