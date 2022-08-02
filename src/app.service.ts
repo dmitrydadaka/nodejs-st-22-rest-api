@@ -3,18 +3,18 @@ import { User } from './interfaces/user.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { UserEntity } from './user.entity';
 import { PostSchema, PutSchema } from './helpers/valid';
+import { SequelizeRepository } from './repository/sequelize-repository';
 
 @Injectable()
 export class AppService {
   constructor(@Inject('User_REPOSITORY')
-  private usersRepository: typeof UserEntity) { }
+  private usersRepository: typeof UserEntity,
+  private sequelizeRepository: SequelizeRepository) { }
 
   public async getUsers(limit, loginSubstring): Promise<UserEntity[]> {
     return await this.usersRepository.findAll()
-    .then((users) => users.sort((a, b) => a.login.localeCompare(b.login)).filter(u => u.isDeleted === false).filter(user => user.login.includes(loginSubstring)).slice(0, limit))
+    .then((users) => this.sequelizeRepository.getAutoSuggestUsers(users, limit, loginSubstring));
   }
-
-
 
   public async findOne(id: string): Promise<UserEntity> {
     return this.usersRepository.findOne<UserEntity>({ where: { id } });
