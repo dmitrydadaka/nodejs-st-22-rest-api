@@ -12,7 +12,7 @@ class SequelizeRepository implements Repository {
     getAutoSuggestUsers(limit, loginSubstring) {
         return this.users.sort((a, b) => a.login.localeCompare(b.login)).filter(u => u.isDeleted === false).filter(user => user.login.includes(loginSubstring)).slice(0, limit);
     }
-    findOne(id: string) {
+    findOne(id: string) { 
         const user: User = this.users.find(user => user.id === id);
 
         if (!user) {

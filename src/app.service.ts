@@ -1,39 +1,38 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { User } from './interfaces/user.interface';
-import { SequelizeRepository } from './repository/sequelize-repository';
-import { PostSchema, PutSchema } from './helpers/valid';
+import { v4 as uuidv4 } from 'uuid';
 import { UserEntity } from './user.entity';
-import { where } from 'sequelize/types';
+import { PostSchema, PutSchema } from './helpers/valid';
 
 @Injectable()
 export class AppService {
-
   constructor(@Inject('User_REPOSITORY')
   private usersRepository: typeof UserEntity) { }
 
-  public async findAll():  Promise<UserEntity[]> {
-    return this.usersRepository.findAll();
+  public async getUsers(limit, loginSubstring): Promise<UserEntity[]> {
+    return await this.usersRepository.findAll()
+    .then((users) => users.sort((a, b) => a.login.localeCompare(b.login)).filter(u => u.isDeleted === false).filter(user => user.login.includes(loginSubstring)).slice(0, limit))
   }
 
-  public async findOne(id: string): Promise<UserEntity> {  
-    return this.usersRepository.findOne<UserEntity>({where: {id}});
+
+
+  public async findOne(id: string): Promise<UserEntity> {
+    return this.usersRepository.findOne<UserEntity>({ where: { id } });
   }
 
   public async create(user: typeof PostSchema): Promise<UserEntity> {
-    return this.usersRepository.create<UserEntity>(user);
+    return await this.usersRepository.create<UserEntity>({ id: uuidv4(), ...user });
   }
 
-  public async remove(id:string, num: number): Promise<number> {
-    await UserEntity.destroy({
+  public async remove(id: string): Promise<number> {
+    return await UserEntity.destroy({
       where: {
         id: id
-      },
-      force: true
+      }
     });
-    return this.usersRepository.destroy<UserEntity>({where:{id}});
   }
 
- /*  public update(id: string, user: typeof PutSchema): Promise<UserEntity> {
-  return this.usersRepository.update<UserEntity>(user, {where:{id}});
-  } */
+  public async update(id: string, user: typeof PutSchema) {
+    return await this.usersRepository.update({ id, ...user }, { where: { id } });
+  }  
 }
