@@ -12,27 +12,22 @@ export class AppService {
   private sequelizeRepository: SequelizeRepository) { }
 
   public async getUsers(limit, loginSubstring): Promise<UserEntity[]> {
-    return await this.usersRepository.findAll()
-    .then((users) => this.sequelizeRepository.getAutoSuggestUsers(users, limit, loginSubstring));
+    return await this.sequelizeRepository.getAutoSuggestUsers(limit, loginSubstring)
   }
 
   public async findOne(id: string): Promise<UserEntity> {
-    return this.usersRepository.findOne<UserEntity>({ where: { id } });
+    return this.sequelizeRepository.findOne(id);
   }
 
   public async create(user: typeof PostSchema): Promise<UserEntity> {
-    return await this.usersRepository.create<UserEntity>({ id: uuidv4(), ...user });
+    return await this.sequelizeRepository.create(user);
   }
 
   public async remove(id: string): Promise<number> {
-    return await UserEntity.destroy({
-      where: {
-        id: id
-      }
-    });
+    return await this.sequelizeRepository.remove(id);
   }
 
   public async update(id: string, user: typeof PutSchema) {
-    return await this.usersRepository.update({ id, ...user }, { where: { id } });
+    return await this.sequelizeRepository.update(id, user);
   }  
 }
