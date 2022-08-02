@@ -2,7 +2,7 @@ import { Table, Column, Model, PrimaryKey } from 'sequelize-typescript';
 
 @Table
 export class UserEntity extends Model {
-  @PrimaryKey
+  
   @Column
   login: string;
 
@@ -15,8 +15,8 @@ export class UserEntity extends Model {
   @Column
   isDeleted: boolean;
 
+  @PrimaryKey
   @Column
-  primaryKey: true;
   id: string;
 
 }
