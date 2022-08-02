@@ -1,6 +1,4 @@
 import { Inject, Injectable } from '@nestjs/common';
-import { User } from './interfaces/user.interface';
-import { v4 as uuidv4 } from 'uuid';
 import { UserEntity } from './user.entity';
 import { PostSchema, PutSchema } from './helpers/valid';
 import { SequelizeRepository } from './repository/sequelize-repository';
@@ -8,7 +6,6 @@ import { SequelizeRepository } from './repository/sequelize-repository';
 @Injectable()
 export class AppService {
   constructor(@Inject('User_REPOSITORY')
-  private usersRepository: typeof UserEntity,
   private sequelizeRepository: SequelizeRepository) { }
 
   public async getUsers(limit, loginSubstring): Promise<UserEntity[]> {

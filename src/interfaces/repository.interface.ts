@@ -1,6 +1,4 @@
 import { PostSchema, PutSchema } from "../helpers/valid";
-import { User } from "./user.interface";
-
 export interface Repository {
     getAutoSuggestUsers(limit:string, loginSubstring: string);
     findOne(id: string);
