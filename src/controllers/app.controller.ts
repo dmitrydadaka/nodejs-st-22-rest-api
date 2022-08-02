@@ -1,8 +1,7 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query, Request, Response } from '@nestjs/common';
-import { AppService } from './app.service';
-import { User } from './interfaces/user.interface';
-import { PostSchema, PutSchema } from './helpers/valid';
-import { response } from 'express';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { AppService } from '../services/app.service';
+import { User } from '../interfaces/user.interface';
+import { PostSchema, PutSchema } from '../helpers/valid';
 
 @Controller()
 export class AppController {
