@@ -1,9 +1,6 @@
 import { PostSchema, PutSchema } from "../helpers/valid";
+import { User } from "./user.interface";
 
 export interface Repository {
-    getAutoSuggestUsers(limit:string, loginSubstring: string);
-    findOne(id: string);
-    update(id:string, user: typeof PutSchema);
-    remove(id:string);
-    create(user: typeof PostSchema);
+    getAutoSuggestUsers(users: User[], limit:string, loginSubstring: string);
 }
