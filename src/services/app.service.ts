@@ -2,7 +2,6 @@ import { Injectable } from '@nestjs/common';
 import { PostSchema, PutSchema } from '../helpers/valid';
 import { SequelizeRepository } from '../repository/sequelize-repository';
 import { User } from '../interfaces/user.interface';
-import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AppService {
