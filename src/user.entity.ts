@@ -16,7 +16,6 @@ export class UserEntity extends Model {
   
   @PrimaryKey
   @Column
-  primaryKey: true;
   id: string;
 
 }
