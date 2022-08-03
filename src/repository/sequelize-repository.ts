@@ -10,11 +10,12 @@ class SequelizeRepository implements Repository {
     constructor(@Inject('User_REPOSITORY')
     private usersRepository: typeof UserEntity) { }
     
-    public async getAutoSuggestUsers(limit, loginSubstring) {
+    public async getUsers(limit, loginSubstring) {
         return await this.usersRepository.findAll()
             .then((users) => users.sort((a, b) => a.login.localeCompare(b.login))
             .filter(u => u.isDeleted === false).filter(user => user.login.includes(loginSubstring)).slice(0, limit));
     }
+    
     public async findOne(id: string): Promise<UserEntity> {
         return  this.usersRepository.findOne<UserEntity>({ where: { id } });
     }

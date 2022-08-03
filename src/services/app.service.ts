@@ -1,22 +1,23 @@
-import { Inject, Injectable } from '@nestjs/common';
-import { UserEntity } from '../user.entity';
+import { Injectable } from '@nestjs/common';
 import { PostSchema, PutSchema } from '../helpers/valid';
 import { SequelizeRepository } from '../repository/sequelize-repository';
+import { User } from '../interfaces/user.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class AppService {
-  constructor(@Inject('User_REPOSITORY')
+  constructor(
   private sequelizeRepository: SequelizeRepository) { }
 
-  public async getUsers(limit, loginSubstring): Promise<UserEntity[]> {
-    return await this.sequelizeRepository.getAutoSuggestUsers(limit, loginSubstring)
+  public async getUsers(limit, loginSubstring): Promise<User[]> {
+    return await this.sequelizeRepository.getUsers(limit, loginSubstring)
   }
 
-  public async findOne(id: string): Promise<UserEntity> {
+  public async findOne(id: string): Promise<User> {
     return this.sequelizeRepository.findOne(id);
   }
 
-  public async create(user: typeof PostSchema): Promise<UserEntity> {
+  public async create(user: typeof PostSchema): Promise<User> {
     return await this.sequelizeRepository.create(user);
   }
 
