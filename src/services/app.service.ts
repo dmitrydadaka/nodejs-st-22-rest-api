@@ -9,7 +9,7 @@ export class AppService {
   private sequelizeRepository: SequelizeRepository) { }
 
   public async getUsers(limit, loginSubstring): Promise<User[]> {
-    return await this.sequelizeRepository.getUsers(limit, loginSubstring)
+    return this.sequelizeRepository.getUsers(limit, loginSubstring)
   }
 
   public async findOne(id: string): Promise<User> {
@@ -17,14 +17,14 @@ export class AppService {
   }
 
   public async create(user: typeof PostSchema): Promise<User> {
-    return await this.sequelizeRepository.create(user);
+    return this.sequelizeRepository.create(user);
   }
 
   public async remove(id: string) {
-    return await this.sequelizeRepository.remove(id);
+    return this.sequelizeRepository.remove(id);
   }
 
   public async update(id: string, user: typeof PutSchema) {
-    return await this.sequelizeRepository.update(id, user);
+    return this.sequelizeRepository.update(id, user);
   }  
 }

@@ -14,12 +14,12 @@ export class AppController {
     @Query('loginSubstring') loginSubstring: string = ''
   ): Promise<User[]> {
     limit = limit > 5 ? 5 : limit;
-    return await this.appService.getUsers(Number(limit), loginSubstring);
+    return this.appService.getUsers(Number(limit), loginSubstring);
   }
 
   @Get(':id')
   public async findOne(@Param('id') id: string): Promise<User> {
-    return await this.appService.findOne(id);
+    return this.appService.findOne(id);
   }
 
   @Post()
@@ -30,12 +30,12 @@ export class AppController {
     catch (err) {
       if (err) throw new BadRequestException(err.details[0].message)
     }
-    return await this.appService.create(user);
+    return this.appService.create(user);
   }
 
   @Delete(':id')
   public async remove(@Param('id') id: string) {
-    return await this.appService.remove(id);
+    return this.appService.remove(id);
   }
 
   @Put(':id')
@@ -46,7 +46,7 @@ export class AppController {
     catch (err) {
       if (err) throw new BadRequestException(err.details[0].message)
     }
-    return await this.appService.update(id, user);
+    return this.appService.update(id, user);
 
   }
 }
