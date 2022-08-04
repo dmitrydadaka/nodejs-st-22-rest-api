@@ -20,7 +20,7 @@ export class AppService {
     return await this.sequelizeRepository.create(user);
   }
 
-  public async remove(id: string): Promise<number> {
+  public async remove(id: string) {
     return await this.sequelizeRepository.remove(id);
   }
 

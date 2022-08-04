@@ -34,7 +34,7 @@ export class AppController {
   }
 
   @Delete(':id')
-  public async remove(@Param('id') id: string): Promise<number> {
+  public async remove(@Param('id') id: string) {
     return await this.appService.remove(id);
   }
 
