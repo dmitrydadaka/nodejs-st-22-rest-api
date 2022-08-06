@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize-typescript';
-import { UserEntity } from '../data-access/user.entity';
+import { UserEntity } from '../data-access/user/user.entity';
+import { GroupEntity } from '../data-access/group/group.entity';
+
 
 export const databaseProviders = [
   {
@@ -13,7 +15,7 @@ export const databaseProviders = [
         password: '123',
         database: 'Users',
       });
-      sequelize.addModels([UserEntity]);
+      sequelize.addModels([UserEntity, GroupEntity]);
       await sequelize.sync();
       return sequelize;
     },

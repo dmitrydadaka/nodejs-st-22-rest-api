@@ -1,14 +1,16 @@
 import { Inject, Injectable } from "@nestjs/common";
-import { Repository } from "../interfaces/repository.interface";
+import { UserRepository } from "../interfaces/user-repository.interface";
 import { v4 as uuidv4 } from 'uuid';
 import { PostSchema, PutSchema } from "../helpers/valid";
-import { UserEntity } from "../data-access/user.entity";
+import { UserEntity } from "../data-access/user/user.entity";
+import { GroupEntity } from "../data-access/group/group.entity";
 
 @Injectable()
-class SequelizeRepository implements Repository {
+class SequelizeUsersRepository implements UserRepository {
 
     constructor(@Inject('User_REPOSITORY')
-    private usersRepository: typeof UserEntity) { }
+    private usersRepository: typeof UserEntity
+    ) { }
     
     public async getUsers(limit, loginSubstring) {
         return await this.usersRepository.findAll({where: {isDeleted: false}})
@@ -33,4 +35,4 @@ class SequelizeRepository implements Repository {
     }
 
 }
-export { SequelizeRepository };
+export { SequelizeUsersRepository };

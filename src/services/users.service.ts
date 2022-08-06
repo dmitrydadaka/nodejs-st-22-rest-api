@@ -1,30 +1,30 @@
 import { Injectable } from '@nestjs/common';
 import { PostSchema, PutSchema } from '../helpers/valid';
-import { SequelizeRepository } from '../repository/sequelize-repository';
+import { SequelizeUsersRepository } from '../repository/sequelize-users-repository';
 import { User } from '../interfaces/user.interface';
 
 @Injectable()
-export class AppService {
+export class UsersService {
   constructor(
-  private sequelizeRepository: SequelizeRepository) { }
+  private sequelizeUsersRepository: SequelizeUsersRepository) { }
 
   public async getUsers(limit, loginSubstring): Promise<User[]> {
-    return this.sequelizeRepository.getUsers(limit, loginSubstring)
+    return this.sequelizeUsersRepository.getUsers(limit, loginSubstring)
   }
 
   public async findOne(id: string): Promise<User> {
-    return this.sequelizeRepository.findOne(id);
+    return this.sequelizeUsersRepository.findOne(id);
   }
 
   public async create(user: typeof PostSchema): Promise<User> {
-    return this.sequelizeRepository.create(user);
+    return this.sequelizeUsersRepository.create(user);
   }
 
   public async remove(id: string) {
-    return this.sequelizeRepository.remove(id);
+    return this.sequelizeUsersRepository.remove(id);
   }
 
   public async update(id: string, user: typeof PutSchema) {
-    return this.sequelizeRepository.update(id, user);
+    return this.sequelizeUsersRepository.update(id, user);
   }  
 }
