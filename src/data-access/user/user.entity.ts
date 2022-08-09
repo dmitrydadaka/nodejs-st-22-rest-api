@@ -1,4 +1,6 @@
-import { Table, Column, Model, PrimaryKey } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, BelongsToMany } from 'sequelize-typescript';
+import { GroupEntity } from '../group/group.entity';
+import { UserGroup } from '../group/user-group.entity';
 
 @Table
 export class UserEntity extends Model {
@@ -18,5 +20,8 @@ export class UserEntity extends Model {
   @PrimaryKey
   @Column
   id: string;
+
+  @BelongsToMany(() => GroupEntity, () => UserGroup)
+  groups: GroupEntity[];
 
 }
