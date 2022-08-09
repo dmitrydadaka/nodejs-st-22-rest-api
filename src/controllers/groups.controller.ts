@@ -1,4 +1,5 @@
 import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
+import { Transaction } from 'sequelize/types';
 import { GroupEntity } from '../data-access/group/group.entity';
 import { UserGroup } from '../data-access/group/user-group.entity';
 import { UserEntity } from '../data-access/user/user.entity';

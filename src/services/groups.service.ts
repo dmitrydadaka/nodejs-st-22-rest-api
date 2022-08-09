@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { SequelizeGroupsRepository } from '../repository/sequelize-groups-repository';
 import { Group } from '../interfaces/group.interface';
 import { GroupEntity } from '../data-access/group/group.entity';
+import { Transaction } from 'sequelize/types';
 
 @Injectable()
 export class GroupsService {

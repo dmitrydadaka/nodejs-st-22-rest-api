@@ -1,14 +1,18 @@
 import { Inject, Injectable } from "@nestjs/common";
+import { Sequelize } from 'sequelize-typescript';
 import { GroupRepository } from "../interfaces/group-repository.interface";
 import { v4 as uuidv4 } from 'uuid';
-import { PostSchema, PutSchema } from "../helpers/valid";
 import { GroupEntity } from "../data-access/group/group.entity";
+import { UserEntity } from "../data-access/user/user.entity";
+import { UserGroup } from "../data-access/group/user-group.entity";
 
 @Injectable()
 class SequelizeGroupsRepository implements GroupRepository {
 
     constructor(@Inject('Group_REPOSITORY')
-    private groupsRepository: typeof GroupEntity
+    private groupsRepository: typeof GroupEntity,
+    @Inject(UserEntity)
+    private sequelize: Sequelize,
     ) { }
     
     public async getUsers() {
@@ -30,8 +34,15 @@ class SequelizeGroupsRepository implements GroupRepository {
     public async update(id: string, user: typeof GroupEntity) {
         return await this.groupsRepository.update({ id, ...user }, { where: { id } });
     }
+    
     public async addUsersToGroup(id, userId) {
-        return;
+        await this.sequelize.transaction(async t => {
+            await UserGroup.create({
+              userId: userId,
+              groupId: id
+            }, { transaction: t });        
+            throw new Error();
+          });
     }
 }
 export { SequelizeGroupsRepository };
