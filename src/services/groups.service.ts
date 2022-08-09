@@ -27,4 +27,8 @@ export class GroupsService {
   public async update(id: string, group: typeof GroupEntity) {
     return this.sequelizeGroupsRepository.update(id, group);
   }  
+
+  public async addUsersToGroup(id, userId) {
+    return this.sequelizeGroupsRepository.addUsersToGroup(id, userId)
+  }
 }

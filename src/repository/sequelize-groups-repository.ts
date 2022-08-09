@@ -30,6 +30,8 @@ class SequelizeGroupsRepository implements GroupRepository {
     public async update(id: string, user: typeof GroupEntity) {
         return await this.groupsRepository.update({ id, ...user }, { where: { id } });
     }
-
+    public async addUsersToGroup(id, userId) {
+        return;
+    }
 }
 export { SequelizeGroupsRepository };

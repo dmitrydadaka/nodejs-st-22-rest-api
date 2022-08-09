@@ -1,5 +1,7 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, NotFoundException, Param, Post, Put } from '@nestjs/common';
 import { GroupEntity } from '../data-access/group/group.entity';
+import { UserGroup } from '../data-access/group/user-group.entity';
+import { UserEntity } from '../data-access/user/user.entity';
 import { Group } from '../interfaces/group.interface';
 import { GroupsService } from '../services/groups.service';
 import { UsersService } from '../services/users.service';
@@ -22,6 +24,14 @@ export class GroupsController {
   @Post()
   public async create(@Body() group: typeof GroupEntity): Promise<Group> {
     return this.groupsService.create(group);
+  }
+
+  @Post(':id')
+  async addUsersToGroup(
+    @Param('id', ) id: string,
+    @Body() userId: string) {
+    const group = await this.groupsService.addUsersToGroup(id, userId);
+    return group;
   }
 
   @Delete(':id')
