@@ -10,16 +10,15 @@ class SequelizeGroupsRepository implements GroupRepository {
 
     constructor(@Inject('Group_REPOSITORY')
     private groupsRepository: typeof GroupEntity,
-    @Inject(UserGroup)
     private sequelize: Sequelize,
     ) { }
-    
+
     public async getUsers() {
-        return await this.groupsRepository.findAll()           
+        return await this.groupsRepository.findAll()
     }
-    
+
     public async findOne(id: string): Promise<GroupEntity> {
-        return  this.groupsRepository.findOne<GroupEntity>({ where: { id }});
+        return this.groupsRepository.findOne<GroupEntity>({ where: { id } });
     }
 
     public async create(group: typeof GroupEntity): Promise<GroupEntity> {
@@ -27,21 +26,21 @@ class SequelizeGroupsRepository implements GroupRepository {
     }
 
     public async remove(id: string) {
-        await  this.groupsRepository.destroy({where: {id}});
+        await this.groupsRepository.destroy({ where: { id } });
     }
 
     public async update(id: string, user: typeof GroupEntity) {
         return await this.groupsRepository.update({ id, ...user }, { where: { id } });
     }
-    
-    public async addUsersToGroup(id, userId) {
+
+    public async addUsersToGroup(id: string, userId: string) {
         await this.sequelize.transaction(async t => {
             await UserGroup.create({
-              userId: userId,
-              groupId: id
-            }, { transaction: t });        
+                userId: userId,
+                groupId: id
+            }, { transaction: t });
             throw new Error();
-          });
+        });
     }
 }
 export { SequelizeGroupsRepository };
