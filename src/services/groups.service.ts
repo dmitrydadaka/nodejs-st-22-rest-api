@@ -29,7 +29,7 @@ export class GroupsService {
     return this.sequelizeGroupsRepository.update(id, group);
   }  
 
-  public async addUsersToGroup(id, userId) {
-    return this.sequelizeGroupsRepository.addUsersToGroup(id, userId)
+  public async addUsersToGroup(id: string, userIds: string[]) {
+    return this.sequelizeGroupsRepository.addUsersToGroup(id, userIds)
   }
 }

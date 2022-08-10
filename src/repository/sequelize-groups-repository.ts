@@ -33,14 +33,19 @@ class SequelizeGroupsRepository implements GroupRepository {
         return await this.groupsRepository.update({ id, ...user }, { where: { id } });
     }
 
-    public async addUsersToGroup(id: string, userId: string) {
+    async addUsersToGroup(id: string, usersIds: string[]): Promise<void> {
         await this.sequelize.transaction(async t => {
-            await UserGroup.create({
-                userId: userId,
-                groupId: id
-            }, { transaction: t });
-            throw new Error();
+    
+          const group: GroupEntity | null = await this.groupsRepository.findOne({
+            where: { id },
+            ...{transaction: t},
+          });
+    
+          if (group) {
+            await Promise.all(usersIds.map((usersId) => group.$add('users', usersId, {transaction: t})));
+          }
         });
-    }
+      }
 }
+
 export { SequelizeGroupsRepository };

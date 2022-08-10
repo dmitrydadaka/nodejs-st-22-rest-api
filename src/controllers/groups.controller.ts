@@ -30,8 +30,8 @@ export class GroupsController {
   @Post(':id')
   async addUsersToGroup(
     @Param('id', ) id: string,
-    @Body() userId: string) {
-    const group = await this.groupsService.addUsersToGroup(id, userId);
+    @Body() userIds: string[]) {
+    const group = await this.groupsService.addUsersToGroup(id, userIds);
     return group;
   }
 
