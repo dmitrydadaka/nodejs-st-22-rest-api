@@ -3,7 +3,6 @@ import { Sequelize } from 'sequelize-typescript';
 import { GroupRepository } from "../interfaces/group-repository.interface";
 import { v4 as uuidv4 } from 'uuid';
 import { GroupEntity } from "../data-access/group/group.entity";
-import { UserEntity } from "../data-access/user/user.entity";
 import { UserGroup } from "../data-access/group/user-group.entity";
 
 @Injectable()
@@ -11,7 +10,7 @@ class SequelizeGroupsRepository implements GroupRepository {
 
     constructor(@Inject('Group_REPOSITORY')
     private groupsRepository: typeof GroupEntity,
-    @Inject(UserEntity)
+    @Inject(UserGroup)
     private sequelize: Sequelize,
     ) { }
     

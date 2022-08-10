@@ -1,22 +1,38 @@
-import { Table, Column, Model, PrimaryKey } from 'sequelize-typescript';
+import { Table, Column, Model, PrimaryKey, DataType } from 'sequelize-typescript';
 
 @Table
 export class UserEntity extends Model {
   
-  @Column
+  @Column({
+    type: DataType.STRING,
+    unique: true,
+    allowNull: false
+  })
   login: string;
 
-  @Column
+  @Column({
+    type: DataType.STRING,
+    allowNull: false
+  })
   password: string;
 
-  @Column
+  @Column({
+    type: DataType.SMALLINT,
+    allowNull: false
+  })
   age: number;
 
-  @Column
+  @Column({
+    type: DataType.BOOLEAN,
+    defaultValue: false
+  })
   isDeleted: boolean;
 
   @PrimaryKey
-  @Column
+  @Column({
+    type: DataType.UUID,
+    unique: true
+  })
   id: string;
 
 }
