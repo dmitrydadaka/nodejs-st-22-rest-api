@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { PostSchema, PutSchema } from '../helpers/valid';
-import { SequelizeUsersRepository } from '../repository/sequelize-users-repository';
+import { SequelizeUsersRepository } from '../repositories/sequelize-users-repository';
 import { User } from '../interfaces/user.interface';
 
 @Injectable()
