@@ -4,7 +4,7 @@ import { Group } from '../interfaces/group.interface';
 import { GroupsService } from '../services/groups.service';
 import { UsersService } from '../services/users.service';
 
-@Controller()
+@Controller('groups')
 export class GroupsController {
 
   constructor(private readonly groupsService: GroupsService) { }
