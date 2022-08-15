@@ -33,7 +33,7 @@ class SequelizeGroupsRepository implements GroupRepository {
         return await this.groupsRepository.update({ id, ...user }, { where: { id } });
     }
 
-    async addUsersToGroup(id: string, usersIds: string[]): Promise<void> {
+   /*  async addUsersToGroup(id: string, usersIds: string[]): Promise<void> {
         await this.sequelize.transaction(async t => {
     
           const group: GroupEntity | null = await this.groupsRepository.findOne({
@@ -45,7 +45,7 @@ class SequelizeGroupsRepository implements GroupRepository {
             await Promise.all(usersIds.map((usersId) => group.$add('users', usersId, {transaction: t})));
           }
         });
-      }
+      } */
 }
 
 export { SequelizeGroupsRepository };

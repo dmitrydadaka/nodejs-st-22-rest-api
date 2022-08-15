@@ -5,12 +5,7 @@ import { Logger } from '../loggers/logger';
 @Injectable()
 export class LoggerMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    Logger.info({
-      path: req.baseUrl,
-      request: req,
-      response: res,
-      method: req.method,
-    });
+    console.log(req, res, `\nMethod: ${req.method}\nPath: ${req.url}`);
     next();
   }
 }

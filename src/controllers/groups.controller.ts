@@ -27,13 +27,13 @@ export class GroupsController {
     return this.groupsService.create(group);
   }
 
-  @Post(':id')
+  /* @Post(':id')
   async addUsersToGroup(
     @Param('id', ) id: string,
     @Body() userIds: string[]) {
     const group = await this.groupsService.addUsersToGroup(id, userIds);
     return group;
-  }
+  } */
 
   @Delete(':id')
   public async remove(@Param('id') id: string) {
