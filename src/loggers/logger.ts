@@ -1,4 +1,3 @@
-import path from 'path';
 import * as winston from 'winston';
 
 export const Logger = () => {
