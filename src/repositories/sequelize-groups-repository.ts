@@ -3,14 +3,13 @@ import { Sequelize } from 'sequelize-typescript';
 import { GroupRepository } from "../interfaces/group-repository.interface";
 import { v4 as uuidv4 } from 'uuid';
 import { GroupEntity } from "../data-access/group/group.entity";
-import { UserGroup } from "../data-access/group/user-group.entity";
 
 @Injectable()
 class SequelizeGroupsRepository implements GroupRepository {
 
     constructor(@Inject('Group_REPOSITORY')
     private groupsRepository: typeof GroupEntity,
-    private sequelize: Sequelize,
+    //private sequelize: Sequelize,
     ) { }
 
     public async getUsers() {
@@ -33,7 +32,7 @@ class SequelizeGroupsRepository implements GroupRepository {
         return await this.groupsRepository.update({ id, ...user }, { where: { id } });
     }
 
-    async addUsersToGroup(id: string, usersIds: string[]): Promise<void> {
+    /* async addUsersToGroup(id: string, usersIds: string[]): Promise<void> {
         await this.sequelize.transaction(async t => {
     
           const group: GroupEntity | null = await this.groupsRepository.findOne({
@@ -45,7 +44,7 @@ class SequelizeGroupsRepository implements GroupRepository {
             await Promise.all(usersIds.map((usersId) => group.$add('users', usersId, {transaction: t})));
           }
         });
-      }
+      } */
 }
 
 export { SequelizeGroupsRepository };

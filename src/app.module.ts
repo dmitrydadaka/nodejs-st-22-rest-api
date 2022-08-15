@@ -9,16 +9,16 @@ import { usersProviders } from './data-access/user/users.providers';
 import { GroupsService } from './services/groups.service';
 import { GroupsController } from './controllers/groups.controller';
 import { LoggerMiddleware } from './middlewares/logger.Middleware';
-
 @Module({
   imports: [DatabaseModule],
   controllers: [UsersController, GroupsController],
   providers: [UsersService,
-  GroupsService,
-  ...usersProviders,
-  ...groupsProviders,
-  SequelizeUsersRepository,
-  SequelizeGroupsRepository],
+    GroupsService,
+    ...usersProviders,
+    ...groupsProviders,
+    SequelizeUsersRepository,
+    SequelizeGroupsRepository,
+    ],
 })
 export class AppModule implements NestModule {
   configure(consumer: MiddlewareConsumer) {

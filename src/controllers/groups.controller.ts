@@ -7,7 +7,7 @@ import { Group } from '../interfaces/group.interface';
 import { GroupsService } from '../services/groups.service';
 import { UsersService } from '../services/users.service';
 
-@Controller()
+@Controller('v1/groups')
 export class GroupsController {
 
   constructor(private readonly groupsService: GroupsService) { }
@@ -27,13 +27,13 @@ export class GroupsController {
     return this.groupsService.create(group);
   }
 
-  @Post(':id')
+ /*  @Post(':id')
   async addUsersToGroup(
     @Param('id', ) id: string,
     @Body() userIds: string[]) {
     const group = await this.groupsService.addUsersToGroup(id, userIds);
     return group;
-  }
+  } */
 
   @Delete(':id')
   public async remove(@Param('id') id: string) {

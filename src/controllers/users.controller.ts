@@ -3,7 +3,7 @@ import { UsersService } from '../services/users.service';
 import { User } from '../interfaces/user.interface';
 import { PostSchema, PutSchema } from '../helpers/valid';
 
-@Controller()
+@Controller('v1/users')
 export class UsersController {
 
   constructor(private readonly appService: UsersService) { }

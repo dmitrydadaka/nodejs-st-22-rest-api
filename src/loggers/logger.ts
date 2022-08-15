@@ -1,7 +1,6 @@
-import path from 'path';
 import * as winston from 'winston';
 
-export const LoggerDev = () => {
+export const Logger = () => {
     return winston.createLogger({
       level: 'info',
       format: winston.format.json(),
@@ -10,5 +9,3 @@ export const LoggerDev = () => {
       ],
     });
   };
-
-export const Logger = process.env.NODE_ENV === 'development' ? LoggerDev() : null;
