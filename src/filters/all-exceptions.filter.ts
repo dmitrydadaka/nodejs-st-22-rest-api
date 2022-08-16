@@ -6,10 +6,12 @@ import {
   HttpStatus,
 } from '@nestjs/common';
 import { HttpAdapterHost } from '@nestjs/core';
+import { logger } from 'src/loggers/logger';
+
 
 @Catch()
 export class AllExceptionsFilter implements ExceptionFilter {
-  constructor(private readonly httpAdapterHost: HttpAdapterHost) {}
+  constructor(private readonly httpAdapterHost: HttpAdapterHost) { }
 
   catch(exception: unknown, host: ArgumentsHost): void {
     // In certain situations `httpAdapter` might not be available in the
@@ -17,6 +19,8 @@ export class AllExceptionsFilter implements ExceptionFilter {
     const { httpAdapter } = this.httpAdapterHost;
 
     const ctx = host.switchToHttp();
+    const req = ctx.getRequest();
+    const res = ctx.getResponse();
 
     const httpStatus =
       exception instanceof HttpException
@@ -30,5 +34,18 @@ export class AllExceptionsFilter implements ExceptionFilter {
     };
 
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
+
+    if (exception instanceof HttpException) {
+      logger.error({
+        controller_method: `[${ctx.getRequest().url} ${ctx.getRequest().method}]`,
+        arguments: {
+          req,
+          res,
+        },
+        httpStatus,
+      });
+    }
+    logger.error(responseBody);
+    throw exception;
   }
 }
