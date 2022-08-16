@@ -36,7 +36,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
     httpAdapter.reply(ctx.getResponse(), responseBody, httpStatus);
 
     if (exception instanceof HttpException) {
-      logger.error({
+      logger.info({
         controller_method: `[${ctx.getRequest().url} ${ctx.getRequest().method}]`,
         arguments: {
           req,
@@ -45,7 +45,7 @@ export class AllExceptionsFilter implements ExceptionFilter {
         httpStatus,
       });
     }
-    logger.error(responseBody);
+    logger.info(responseBody);
     throw exception;
   }
 }
