@@ -9,7 +9,7 @@ import { usersProviders } from './data-access/user/users.providers';
 import { GroupsService } from './services/groups.service';
 import { GroupsController } from './controllers/groups.controller';
 import { LoggerMiddleware } from './middlewares/logger.Middleware';
-import { AllExceptionsFilter } from './loggers/all-exceptions.filter';
+import { AllExceptionsFilter } from './filters/all-exceptions.filter';
 import { APP_FILTER } from '@nestjs/core';
 
 @Module({
