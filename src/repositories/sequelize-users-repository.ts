@@ -21,6 +21,9 @@ class SequelizeUsersRepository implements UserRepository {
     public async findOne(id: string): Promise<UserEntity> {
         return  this.usersRepository.findOne<UserEntity>({ where: { id }});
     }
+    public async findOneForLogin(login: string, password: string): Promise<UserEntity> {
+        return  this.usersRepository.findOne<UserEntity>({where:{ login, password }});
+    }
 
     public async create(user: typeof PostSchema): Promise<UserEntity> {
         return await this.usersRepository.create<UserEntity>({ id: uuidv4(), ...user });
