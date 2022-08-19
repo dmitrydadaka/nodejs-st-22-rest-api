@@ -1,5 +1,5 @@
 import { Injectable } from '@nestjs/common';
-import { SequelizeGroupsRepository } from '../repository/sequelize-groups-repository';
+import { SequelizeGroupsRepository } from '../repositories/sequelize-groups-repository';
 import { Group } from '../interfaces/group.interface';
 import { GroupEntity } from '../data-access/group/group.entity';
 import { Transaction } from 'sequelize/types';
@@ -29,7 +29,7 @@ export class GroupsService {
     return this.sequelizeGroupsRepository.update(id, group);
   }  
 
-  public async addUsersToGroup(id: string, userIds: string[]) {
+/*   public async addUsersToGroup(id: string, userIds: string[]) {
     return this.sequelizeGroupsRepository.addUsersToGroup(id, userIds)
-  }
+  } */
 }
