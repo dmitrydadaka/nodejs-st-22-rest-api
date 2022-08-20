@@ -1,9 +1,11 @@
-import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, Param, Post, Put, Query, UseGuards } from '@nestjs/common';
 import { UsersService } from '../services/users.service';
 import { User } from '../interfaces/user.interface';
 import { PostSchema, PutSchema } from '../helpers/valid';
+import { LocalAuthGuard } from '../guards/local-auth.guards';
 
 @Controller('v1/users')
+@UseGuards(LocalAuthGuard)
 export class UsersController {
 
   constructor(private readonly appService: UsersService) { }
