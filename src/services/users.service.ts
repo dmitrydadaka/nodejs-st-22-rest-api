@@ -7,7 +7,7 @@ import { User } from '../interfaces/user.interface';
 export class UsersService {
   constructor(
   private sequelizeUsersRepository: SequelizeUsersRepository) { }
-
+  
   public async getUsers(limit, loginSubstring): Promise<User[]> {
     return this.sequelizeUsersRepository.getUsers(limit, loginSubstring)
   }
