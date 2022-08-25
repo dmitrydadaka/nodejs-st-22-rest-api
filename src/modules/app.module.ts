@@ -18,9 +18,12 @@ import { AuthService } from '../services/auth.service';
 import { LocalStrategy } from '../strategies/local.strategy';
 import { AuthController } from '../controllers/auth.controller';
 import { JwtStrategy } from '../strategies/jwt.strategy';
+import { ConfigModule } from '@nestjs/config';
+
 
 @Module({
   imports: [
+    ConfigModule.forRoot({ envFilePath:'../.env', isGlobal: true }),
     DatabaseModule,
     PassportModule,
     JwtModule.register({

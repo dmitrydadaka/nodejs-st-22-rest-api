@@ -11,10 +11,10 @@ export const databaseProviders = [
       const sequelize = new Sequelize({
         dialect: 'postgres',
         host: 'localhost',
-        port: 5432,
+        port: Number(process.env.PORT),
         username: 'postgres',
         password: '123',
-        database: 'Users',
+        database: "Users",
       });
       sequelize.addModels([UserEntity, GroupEntity, UserGroup]);
       await sequelize.sync();
