@@ -12,7 +12,7 @@ class SequelizeGroupsRepository implements GroupRepository {
     //private sequelize: Sequelize,
     ) { }
 
-    public async getUsers() {
+    public async getGroups() {
         return await this.groupsRepository.findAll()
     }
 
