@@ -13,7 +13,7 @@ export class GroupsController {
 
   @Get()
   public async getGroups(): Promise<Group[]> {
-    return this.groupsService.getUsers();
+    return this.groupsService.getGroups();
   }
 
   @Get(':id')

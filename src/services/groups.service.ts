@@ -9,8 +9,8 @@ export class GroupsService {
   constructor(
   private sequelizeGroupsRepository: SequelizeGroupsRepository) { }
 
-  public async getUsers(): Promise<Group[]> {
-    return this.sequelizeGroupsRepository.getUsers()
+  public async getGroups(): Promise<Group[]> {
+    return this.sequelizeGroupsRepository.getGroups()
   }
 
   public async findOne(id: string): Promise<Group> {

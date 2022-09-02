@@ -1,4 +1,4 @@
-import { PostSchema, PutSchema } from "../helpers/valid";
+import { PostSchema, PutSchema } from "../validation/valid";
 export interface UserRepository {
     getUsers(limit:string, loginSubstring: string);
     findOne(id: string);

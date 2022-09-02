@@ -28,6 +28,7 @@
     "@nestjs/jwt": "^9.0.0",
     "@nestjs/passport": "^9.0.0",
     "@nestjs/platform-express": "^9.0.0",
+    "dotenv": "^16.0.1",
     "express-joi-validation": "^5.0.1",
     "joi": "^17.6.0",
     "passport": "^0.6.0",

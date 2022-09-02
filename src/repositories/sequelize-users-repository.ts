@@ -1,9 +1,8 @@
 import { Inject, Injectable } from "@nestjs/common";
 import { UserRepository } from "../interfaces/user-repository.interface";
 import { v4 as uuidv4 } from 'uuid';
-import { PostSchema, PutSchema } from "../helpers/valid";
+import { PostSchema, PutSchema } from "../validation/valid";
 import { UserEntity } from "../data-access/user/user.entity";
-import { GroupEntity } from "../data-access/group/group.entity";
 
 @Injectable()
 class SequelizeUsersRepository implements UserRepository {
