@@ -29,7 +29,7 @@ describe('GroupsController', () => {
 
   it('return one group by id', async () => {
     service.findOne.mockResolvedValue(group);
-    expect(await controller.findOne(group.id)).toBe(group);
+    expect(await controller.findOne(group.id)).toBe(group);  
   });
 
   it('use false id for checking result', async () => {

@@ -14,7 +14,7 @@ export const databaseProviders = [
         port: Number(process.env.PORT),
         username: 'postgres',
         password: '123',
-        database: "Users",
+        database: process.env.database,
       });
       sequelize.addModels([UserEntity, GroupEntity, UserGroup]);
       await sequelize.sync();

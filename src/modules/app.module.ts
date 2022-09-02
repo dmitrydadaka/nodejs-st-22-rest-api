@@ -23,7 +23,7 @@ import { ConfigModule } from '@nestjs/config';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ envFilePath:'../.env', isGlobal: true }),
+    ConfigModule.forRoot(),
     DatabaseModule,
     PassportModule,
     JwtModule.register({
